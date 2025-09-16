@@ -1,0 +1,341 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("../assets/img/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.layer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: drop-shadow(0 -10px 10px rgba(0, 0, 0, 0.5));
+  z-index: -1;
+}
+
+#rain {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@font-face {
+  font-family: "KillTheNoise";
+  src: url("../assets/fonts/KillTheNoise.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Epilepsy";
+  src: url("../assets/fonts/EpilepsySans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.hw {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 20px;
+}
+.hw-base-block {
+  width: 800px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+  width: 100%;
+}
+.hw-base-block .img-wrap {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.hw-base-block img {
+  display: block;
+  max-width: clamp(300px, 80vw, 800px);
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5));
+  transform: translate(0, 0);
+}
+.hw-base-block .modal {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  max-height: 600px;
+  min-width: 300px;
+  background-color: #2d2d2d;
+  border: 2px solid #5c5c5c;
+  color: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+  display: none;
+  transform: translateY(100px);
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.hw-base-block .modal-header {
+  width: 100%;
+  padding: 5px 10px;
+  background-color: #242424;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.hw-base-block .modal-body {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  font-family: "Epilepsy", sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  overflow: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+}
+.hw-base-block .modal-title {
+  margin: 0;
+  font-family: "Epilepsy", sans-serif;
+  letter-spacing: 2px;
+}
+.hw-base-block .modal-control__btn {
+  background-color: #242424;
+  font-size: 20px;
+  cursor: pointer;
+  color: #e6e6e6;
+}
+.hw-base-block .task-block {
+  padding: 10px;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hw-base-block .task {
+  margin: 0;
+}
+.hw-base-block .input-block {
+  display: flex;
+  gap: 20px;
+}
+.hw-base-block .task-input {
+  background-color: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-bottom: 2px solid #e4e4e4;
+  font-family: "Epilepsy", sans-serif;
+  font-size: 20px;
+  outline: none;
+  letter-spacing: 2px;
+  max-width: 200px;
+  display: block;
+  width: 100%;
+}
+.hw-base-block .task-btn {
+  max-width: 100px;
+  border-radius: 0;
+  background-color: #242424;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-family: "Epilepsy", sans-serif;
+}
+.hw-list-block {
+  width: 100%;
+  padding: clamp(20px, 5vw, 50px) 0;
+}
+.hw-list {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+}
+.hw-list__item {
+  border: clamp(2px, 5vw, 5px) solid #ab0d20;
+  border-radius: 100px;
+  width: clamp(60px, 10vw, 100px);
+  min-height: clamp(60px, 10vw, 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: "Epilepsy", sans-serif;
+  color: #e5e5e5;
+  transition: all 0.3s;
+  background-color: rgba(16, 16, 16, 0.3);
+  cursor: pointer;
+}
+.hw-list__item:hover {
+  border: 5px solid #af270f;
+  box-shadow: 3px 2px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+  transition: all 0.3s;
+}
+.hw .hide {
+  opacity: 0;
+  animation: hide 0.6s ease forwards;
+}
+.hw .show {
+  animation: show 1s ease forwards;
+}
+@keyframes show {
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes hide {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+}
+
+.shop {
+  width: 100%;
+}
+.shop-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #212121;
+  padding: 10px 20px;
+  align-items: center;
+}
+.shop__title {
+  font-size: 25px;
+}
+.shop__cart {
+  padding: 5px;
+  margin: 0 !important;
+}
+.shop__cart > img {
+  width: 25px;
+  display: block;
+}
+.shop-body {
+  width: 100%;
+  margin-top: 10px;
+  position: relative;
+}
+.shop-list {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.shop-list__item {
+  background-color: #212121;
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+.shop-list__item:hover {
+  box-shadow: 0px 0px 10px rgb(0, 0, 0);
+  transition: all 0.1s;
+}
+.shop-img-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+.shop-img-block img {
+  width: 80px;
+}
+.shop .cart {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: #212121;
+}
+.shop .cart-body {
+  width: 100%;
+  margin-top: 20px;
+}
+.shop .cart-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.shop .cart-list__item {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 15px 15px;
+}
+.shop .cart-list__item:hover {
+  background-color: #181818;
+}
+.shop .cart-list__img {
+  width: 50px;
+  height: 50px;
+}
+.shop .cart-list__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.shop .cart-list__data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.shop .close {
+  display: none;
+}
+.shop .counter {
+  justify-content: center;
+  align-items: center;
+}
+.shop .counter input {
+  max-width: 50px;
+  background-color: #181818;
+  color: #fff;
+  outline: none;
+  font-size: 20px;
+  border: none;
+  font-family: "Epilepsy", sans-serif;
+  text-align: center;
+}
+
+/*# sourceMappingURL=main.css.map */
