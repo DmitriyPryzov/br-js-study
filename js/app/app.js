@@ -25,6 +25,7 @@ function appInit() {
             
             const res = await module.default();
             
+
            const modalTitle = modal.querySelector(".modal-title");
            const modalBody = modal.querySelector(".modal-body");
             

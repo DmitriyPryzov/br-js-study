@@ -165,6 +165,12 @@ body {
   cursor: pointer;
   font-family: "Epilepsy", sans-serif;
 }
+.hw-base-block .edit-wrap {
+  padding: 20px;
+}
+.hw-base-block .edit-text {
+  padding: 0 10px;
+}
 .hw-list-block {
   width: 100%;
   padding: clamp(20px, 5vw, 50px) 0;
@@ -336,6 +342,47 @@ body {
   border: none;
   font-family: "Epilepsy", sans-serif;
   text-align: center;
+}
+
+.sort-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-sizing: border-box;
+}
+.sort-table thead {
+  width: 100%;
+  border: 1px solid rgb(15, 15, 15);
+}
+.sort-table th {
+  padding: 10px;
+  background-color: rgb(15, 15, 15);
+}
+.sort-table th:hover {
+  background-color: rgb(32, 32, 32);
+  cursor: pointer;
+}
+.sort-table tr {
+  border-bottom: 1px solid rgb(15, 15, 15);
+}
+.sort-table td {
+  padding: 5px 10px;
+  border: 1px solid rgb(15, 15, 15);
+}
+
+.resize-block {
+  padding: 10px;
+  background-color: rgb(17, 17, 17);
+  position: relative;
+  overflow: auto;
+}
+.resize-block .resize-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(107, 107, 107);
+  cursor: se-resize;
 }
 
 /*# sourceMappingURL=main.css.map */

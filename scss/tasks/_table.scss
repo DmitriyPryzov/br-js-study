@@ -1,0 +1,29 @@
+.sort-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+
+    thead {
+        width: 100%;
+        border: 1px solid rgb(15, 15, 15);
+    }
+
+    th {
+        padding: 10px;
+        background-color: rgb(15, 15, 15);
+
+        &:hover {
+            background-color: rgb(32, 32, 32);
+            cursor: pointer;
+        }
+    }
+
+    tr {
+        border-bottom: 1px solid rgb(15, 15, 15);
+    }
+
+    td {
+        padding: 5px 10px;
+        border: 1px solid rgb(15, 15, 15);
+    }
+}

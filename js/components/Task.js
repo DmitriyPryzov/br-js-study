@@ -1,3 +1,5 @@
+import Element from "../helpers/element.js";
+
 export default class Task {
     constructor () {
         this._task = {
@@ -35,36 +37,32 @@ export default class Task {
         return this._inputsElements[name].value;
     }
 
-    output(text) {
-        this._task.output.textContent = "output: " + text;
+    output(answer) {
+
+        if (answer instanceof HTMLElement) {
+            this._task.output.innerHTML = "output: ";
+            this._task.output.append(answer);
+        } else {
+            this._task.output.textContent = "output: " + answer;
+        }
 
         return this._task.output;
     }
 
     render() {
 
-        const taskBlock = document.createElement("div");
-              taskBlock.classList.add("task-block");
-
-        const desc = document.createElement("p");
-              desc.classList.add("task");
-              desc.textContent = "Task: " + this._task.description;
-
-        taskBlock.append(desc);
+        const taskBlock = new Element({tag: "div", classes: "task-block"})
+                            .child({tag: "p", classes: "task", text: "Task: " + this._task.description});
 
         for (let i = 0; i < this._task.inputs.length; i++) {
             const inputData = this._task.inputs[i];
 
-            const inputBlock = document.createElement("div");
-                  inputBlock.classList.add("input-block");
+            const inputBlock = new Element({tag: "div", classes: "input-block"})
+                            .child({tag: "label", classes: "task", text: inputData.label})
+                            .child({name: "input", tag: "input", classes: "task-input", attributes: {"data-id": inputData.name}});
 
-            const label = document.createElement("label");
-                  label.classList.add("task");
-                  label.textContent = inputData.label;
 
-            const input = document.createElement("input");
-                  input.classList.add("task-input");
-                  input.dataset.id = inputData.name;
+            let input = inputBlock.get("input");
 
                   this._inputsElements[inputData.name] = input;
 
@@ -76,23 +74,14 @@ export default class Task {
                     }); 
                   }
             
-            inputBlock.append(label, input);
-            taskBlock.append(inputBlock);
+            taskBlock.get().append(inputBlock.get());
         }
 
-        const btn = document.createElement("button");
-              btn.classList.add("task-btn");
-              btn.textContent = this._task.nameBtn;
+        taskBlock.child({tag: "button", classes: "task-btn", text: this._task.nameBtn, onClick: () => this._task.clickBtn()})
+                 .child({name: "output", tag: "div", classes: "task", text: "output: "});
 
-              btn.addEventListener("click", () => this._task.clickBtn());
+              this._task.output = taskBlock.get("output");
 
-        const output = document.createElement("p");
-              output.classList.add("task");
-              output.textContent = "output: ";
-              this._task.output = output;
-
-        taskBlock.append(btn, output);
-
-        return taskBlock;
+        return taskBlock.get();
     }
 }
