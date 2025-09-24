@@ -17,14 +17,14 @@ export default function editTextInit() {
 
 function keyPress(el) {
     document.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.key.toLowerCase() === "e") {
+        if (e.ctrlKey && e.code === "KeyE") {
             e.preventDefault();
             
             el.setAttribute("contenteditable", "true");
             el.focus();
         }
 
-        if (e.ctrlKey && e.key.toLowerCase() === "s") {
+        if (e.ctrlKey && e.code === "KeyS") { 
             e.preventDefault();
             
             el.setAttribute("contenteditable", "false");
